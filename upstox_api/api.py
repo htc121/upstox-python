@@ -264,11 +264,17 @@ class Upstox:
 
     def _on_error (self, ws, error):
         if self.on_error:
-            self.on_error(ws, error)
+            self.on_error(error)
 
     def _on_close (self, ws):
         if self.on_disconnect:
-            self.on_disconnect(ws)
+            self.on_disconnect()
+
+    def _on_open (self, ws):
+        if self.on_open:
+            self.on_open()
+
+
 
     def __init__(self, api_key, access_token):
         """ logs in and gets enabled exchanges and products for user """
@@ -314,7 +320,8 @@ class Upstox:
                                                 header={'Authorization: Bearer' + self.access_token},
                                                 on_data=self._on_data,
                                                 on_error=self._on_error,
-                                                on_close=self._on_close)
+                                                on_close=self._on_close,
+                                                on_open=self._on_open)
         if run_in_background is True:
             self.ws_thread = threading.Thread(target=self.websocket.run_forever)
             self.ws_thread.daemon = True
@@ -336,6 +343,9 @@ class Upstox:
 
     def set_on_error(self, event_handler):
         self.on_error = event_handler
+
+    def set_on_open(self, event_handler):
+        self.on_open = event_handler
 
     def get_profile(self):
         return self.api_call_helper('profile', PyCurlVerbs.GET, None, None)
