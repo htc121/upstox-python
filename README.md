@@ -166,41 +166,41 @@ def socket_connect():
     print ("Socket connect code executed")
 
     def event_handler_socket_open():
-        print("********SOCKET OPEN****************" + str(datetime.datetime.now()))
+        print("********SOCKET OPEN****************")
         print("\n\n")
 
     u.set_on_open(event_handler_socket_open)
 
     def event_handler_quote_update(message):
-        print("********QUOTE UPDATE****************" + str(datetime.datetime.now()))
+        print("********QUOTE UPDATE****************")
         # print(message)
         print("\n\n")
 
     u.set_on_quote_update(event_handler_quote_update)
 
     def event_handler_order_update(message):
-        print("********ORDER UPDATE****************" + str(datetime.datetime.now()))
+        print("********ORDER UPDATE****************")
         print(message)
         print("\n\n")
 
     u.set_on_order_update(event_handler_order_update)
 
     def event_handler_trade_update(message):
-        print("********TRADE UPDATE****************" + str(datetime.datetime.now()))
+        print("********TRADE UPDATE****************")
         print(message)
         print("\n\n")
 
     u.set_on_trade_update(event_handler_trade_update)
 
     def event_handler_error(err):
-        print("********ERROR HANDLER****************" + str(datetime.datetime.now()))
+        print("********ERROR HANDLER****************")
         print(err)
         print("\n\n")
 
     u.set_on_error(event_handler_error)
 
     def event_handler_socket_disconnect():
-        print("********SOCKET DISCONNECTED****************" + str(datetime.datetime.now()))
+        print("********SOCKET DISCONNECTED****************")
         print("\n\n")
         # Uncomment For Reconnection Logic
         u.start_websocket(False)
